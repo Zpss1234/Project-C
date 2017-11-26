@@ -1,0 +1,165 @@
+//伪-第一个程序
+#define _CRT_SECURE_NO_WARNINGS //消除scanf等的警告
+
+#include <stdio.h>
+#include <Windows.h>
+#include <stdlib.h>
+#include <conio.h>
+//#include "stdafx.h"
+
+#define PI 3.1415926		//预处理定义常量
+const double PAI = PI;		//关键字定义double常量
+
+#define UP           72
+#define LEFT         75
+#define RIGHT        77
+#define DOWN         80
+#define ESC          27
+
+
+void stop(double time) {
+	double temp = time * 1000;
+	Sleep((int)temp);
+}
+
+void part1(void) {
+	printf("Hello,World!\n");//HelloWorld程序
+	printf("%f = π\n", PAI);	//格式化输出常量and小数
+	long b = 100; 1;
+	printf("The Max Score in Primer School is %ld\n", b);
+	long long c = 120;
+	printf("The Max Score in Junior School is %lld\n", c);
+	int d = 0b100;			//二进制
+	int e = 010;			//八进制
+	int f = 0xB;			//十六进制
+	printf("x2:0100 = %d\n", d);
+	printf("x8:010 = %d\n", e);
+	printf("x16:B = %d\n", f);
+	short g = 32768;
+	unsigned short h = 32768;
+	printf("g=32767+1,h=32767+1,After Begin?\n");
+	stop(1.5);				//短整型溢出
+	printf("g = %d,h = %d\n", g, h);
+	float i = 3.1f;			//单精度(从double截断至float）
+	double j = 3.1;			//双精度
+	double k = 3.1;			//长双精度
+	printf("i=%f=j=%f=k=%Lf\n", i, j, k);	//长双精度占位符%Lf
+	printf("TEST\nCHAR\n");	//换行符\n
+	printf("TEST\rCHAR\n");	//回车符\r
+	printf("TEST\bCHAR\n");	//退格符\b
+	printf("TEST\tCHAR\nHi\tWorld\n");		//制表符（Tab）\t
+	printf("TEST\fCHAR\n");	//换页符\f
+	printf("TEST\\CHAR\n");	//反斜杠“\”
+	printf("\"\'TESTCHAR\'\"\n");			//单双引号"'
+	char l = 'a';			//函数sizeof()数据类型长度
+	printf("An %dpple\n", l);				//输出为97
+	printf("An %cpple\n", l);				//输出字符变量用占位符%c
+	l = 'A';
+	printf("An %dpple\n", l);//输出为65
+	printf("An %cpple\n", l);//得出字母从大写到小写只需减去32
+	typedef int num;		//给数据类型起别名
+	num m = 120;
+	printf("Test %d\n", m);
+}
+
+void part2(void){
+	int a;
+	printf("Enter Your Score:");
+	scanf("%d", &a);
+	if (a >= 120)//判断语句应用判断符号==而不是赋值符号=
+		printf("Very Good\n");
+	else if (a >= 100)
+		printf("Good\n");
+	else if (a >= 80)
+		printf("Fine\n");
+	else
+		printf("Fail\n");//判断语句，if与else的联合使用
+	stop(1.5);
+	printf("Let Us Play A Game\n");
+	printf("Try To Press A Direction Key\n");
+	printf("E.g ↑↓←→\n");
+	printf("Press Esc To Exit\n");
+A:
+		switch (getch())//switch：控制语句，指定判断对象；_getch：检测实时输入
+		{
+		case UP:				//分情况执行语句
+			printf("Go Up\n");
+			break;				//跳出当前循环
+		case LEFT:
+			printf("Go Left\n");
+			break;
+		case RIGHT:
+			printf("Go Righ\n");
+			break;
+		case DOWN:
+			printf("Go Down\n");
+			break;			
+		case ESC:
+			goto B;//goto与标签搭配跳转循环
+		}
+
+		goto A;
+B:
+		printf("Press Enter To Exit...\n");
+		int i;
+		for (i = 0; i <= 10; i++) { //for循环（定义;判断;执行）{语句}
+			printf("The num i is %d\n", i);
+			for (int j = 0; j <= 10; j++)//嵌套循环
+				printf("-");
+			printf("\n");
+		}
+		printf("After that,The i =%d\n", i);
+
+		for (int k = 1; k <= 9; k++) { //九九乘法表-嵌套
+			for (int l = 1; l <= k; l++) {
+				printf("%d x %d = %d ", k, l, k*l);
+			}
+			printf("\n");
+		}
+		int m = 0;
+		printf("m = 0\n");
+		while (m < 0)//while循环--简单的for
+		{
+			m++;							//这一段代码
+			printf("while:M = %d\n", m);	//不会执行
+		}									//因为m=0
+		
+		do
+		{
+			m++;
+			printf("do-while:m = %d\n", m);
+		} while (m < 0);//do-while循环，先执行do{}，再判断while()
+}
+
+void part3(void){
+	int level = 0;
+	printf("What is your QQ level:");
+	scanf("%d", &level);
+	if (level != 0)//逻辑运算符，逻辑非（不等于!)
+	{
+		if (level >= 1 && level <= 5)//逻辑与（且&&）
+			printf("UnStong Chicken\n");
+		else if ((level > 16 && level < 32) || level == 16)//逻辑或||
+			printf("So so\n");
+		else
+			printf("Amazing Level\n");
+	}
+	else
+		printf("Vegetable Bird\n");
+
+}
+
+
+int main(void) {
+
+	part1();
+	stop(2);
+	part2();
+	stop(2);
+	part3();
+
+
+	getchar();
+	getchar();
+	return 0;
+}
